@@ -1,16 +1,41 @@
 $(window).on("load", function () {
     $("#win-title").hide();
     $("#level-one").hide();
+    $("#level-two").hide();
+    $("#level-three").hide();
+    $("#level-four").hide();
     $("#number-of-clicks").hide();
 });
 
 $(document).ready(function () {
     let clicks = 0;
+    let level;
 
     $("#start-button").click(function () {
         $("#start-page").hide();
-        $("#level-one").show();
         $("#number-of-clicks").show();
+
+        let x = Math.floor((Math.random() * 4) + 1);
+        switch(x) {
+            case 1: {
+                level = $("#level-one");
+                level.name = "#level-one";
+            } break;
+            case 2: {
+                level = $("#level-two");
+                level.name = "#level-two";
+            } break;
+            case 3: {
+                level = $("#level-three");
+                level.name = "#level-three";
+            } break;
+            case 4: {
+                level = $("#level-four");
+                level.name = "#level-four";
+            } break;
+        }
+
+        level.show();
     });
 
     $("td").click(function (e) {
@@ -29,7 +54,7 @@ $(document).ready(function () {
             $("#clicks").text(clicks);
 
             let allMarked = true;
-            $("td").each(function() {
+            $(level.name + " td").each(function() {
                if ($(this).hasClass("marked") || $(this).hasClass("empty")) {}
                else allMarked = false;
             });
